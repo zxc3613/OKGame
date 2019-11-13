@@ -15,29 +15,9 @@ public class Images : MonoBehaviour
         set { this.characterphoto.sprite = value; }
     }
 
-    //public bool ActiveDelete
-    //{
-    //    get
-    //    {
-    //        return packPanel.gameObject.activeSelf;
-    //    }
-    //    set
-    //    {
-    //        packPanel.gameObject.SetActive(value);
 
-    //        if (value)
-    //        {
-    //            imageButton.interactable = true;
-    //        }
-    //        else
-    //        {
-    //            imageButton.interactable = false;
-    //        }
-    //    }
-    //}
     private void Start()
     {
         imageButton = GetComponent<Button>();
-        //this.ActiveDelete = false;
     }
 }

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+public interface ISlotList
+{
+    void DidSelectSlot(MySlotManager mySlotManager);
+}
 public class MySlotManager : MonoBehaviour
 {
     [SerializeField] GameObject oneSlotList;
@@ -16,11 +19,22 @@ public class MySlotManager : MonoBehaviour
 
     [SerializeField] PlayViewManager playViewManager;
 
+    public ISlotList slotDelegate;
+    public Image slotImage;
+
+    public Sprite SlotImageSprite
+    {
+        get { return slotImage.sprite; }
+        set { this.slotImage.sprite = value; }
+    }
+
     public void OnOneButton()
     {
         oneSlotList.gameObject.SetActive(true);
         twoSlotList.gameObject.SetActive(false);
         threeSlotList.gameObject.SetActive(false);
+
+        slotDelegate.DidSelectSlot(this);
     }
     public void OnTwoButton()
     {
@@ -37,13 +51,14 @@ public class MySlotManager : MonoBehaviour
 
     public void OnPackOpen()
     {
-        PackManager packManager = Instantiate(packPanelPrefab, packPanel).GetComponent<PackManager>();
         ActiveDelete = true;
+        PackManager packManager = Instantiate(packPanelPrefab, packPanel).GetComponent<PackManager>();
     }
     private void Start()
     {
         ActiveDelete = false;
     }
+
     public bool ActiveDelete
     {
         get
