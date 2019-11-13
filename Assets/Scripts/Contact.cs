@@ -4,9 +4,15 @@ using System;
 public struct Contacts
 {
     public List<Contact> contactList;
+    public List<Contact> contactLists;
+    public List<Contact> contactListss;
+    public List<Contact> contactListsss;
     public Contacts(List<Contact> contacts)
     {
         this.contactList = contacts;
+        this.contactLists = contacts;
+        this.contactListss = contacts;
+        this.contactListsss = contacts;
     }
 }
 

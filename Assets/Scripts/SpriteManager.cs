@@ -25,6 +25,10 @@ public class SpriteManager : MonoBehaviour
         if (!cachedSprites.ContainsKey(name))
         {
             Sprite sprite = Resources.Load<Sprite>("Play/" + name);
+            if (sprite == null) sprite = Resources.Load<Sprite>("Kill/" + name);
+            if (sprite == null) sprite = Resources.Load<Sprite>("Defense/" + name);
+            if (sprite == null) sprite = Resources.Load<Sprite>("store/" + name);
+
             if (sprite) cachedSprites.Add(sprite.name, sprite);
 
             return sprite;

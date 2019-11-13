@@ -13,7 +13,7 @@ public class StoreListManager : MonoBehaviour, IImagePanel
     Contact contact;
     Contacts? contacts;
     Sprite[] sprites;
-    IStoreListManager storeListDelegate;
+    public IStoreListManager storeListDelegate;
 
     [Header("Prefab")]
     [SerializeField] GameObject popupPanelPrefab;
@@ -21,10 +21,10 @@ public class StoreListManager : MonoBehaviour, IImagePanel
     [SerializeField] GameObject playViewManagerprefab;
     [SerializeField] GameObject imagesPrefab;
     [Header("ScrollView")]
-    [SerializeField] GameObject playScrollView;
-    [SerializeField] GameObject killScrollView;
-    [SerializeField] GameObject defenseScrollView;
-    [SerializeField] GameObject storeScrollView;
+    public GameObject playScrollView;
+    public GameObject killScrollView;
+    public GameObject defenseScrollView;
+    public GameObject storeScrollView;
     [Header("Content")]
     [SerializeField] RectTransform playContent;
     [SerializeField] RectTransform killContent;
@@ -37,7 +37,7 @@ public class StoreListManager : MonoBehaviour, IImagePanel
     List<Sprite> spritesListDefense = new List<Sprite>();
     List<Sprite> spritesListStore = new List<Sprite>();
 
-    List<Sprite> spritesList = new List<Sprite>();
+    [HideInInspector] public List<Sprite> spritesList = new List<Sprite>();
     List<ImagePanel> imagesList = new List<ImagePanel>();
 
     public delegate void AddContact(Contact contact);
@@ -172,21 +172,21 @@ public class StoreListManager : MonoBehaviour, IImagePanel
 
 
 
-    void LoadData()
-    {
-        if (contacts.HasValue)
-        {
-            Contacts contactsValue = contacts.Value;
+    //void LoadData()
+    //{
+    //    if (contacts.HasValue)
+    //    {
+    //        Contacts contactsValue = contacts.Value;
 
-            // 정렬
-            contactsValue.contactList.Sort();
+    //        // 정렬
+    //        contactsValue.contactList.Sort();
 
-            for (int i = 0; i < contactsValue.contactList.Count; i++)
-            {
-                AddList(contactsValue.contactList[i], i);
-            }
-        }
-    }
+    //        for (int i = 0; i < contactsValue.contactList.Count; i++)
+    //        {
+    //            AddList(contactsValue.contactList[i], i);
+    //        }
+    //    }
+    //}
 
     void AddList(Contact contact, int index)
     {
@@ -196,6 +196,7 @@ public class StoreListManager : MonoBehaviour, IImagePanel
         imagesList.Add(imagePanel);
     }
     [HideInInspector] public int h;
+    [HideInInspector] public int j;
     public void DidSelectImagePanel(ImagePanel imagePanel)
     {
         if (playScrollView.activeSelf == true)
@@ -206,6 +207,7 @@ public class StoreListManager : MonoBehaviour, IImagePanel
             popupPanel.Open();
             popupPanel.popupDelegate = () =>
             {
+                j = 1;
                 h = imagesList.IndexOf(imagePanel);
                 storeListDelegate.DidSelectAdd(this);
                 popupPanel.Close();
@@ -215,6 +217,48 @@ public class StoreListManager : MonoBehaviour, IImagePanel
                 //playViewManager.GetComponent<Image>().sprite = spritesList[imageIndex];
                 //List<Contact> contactList = contacts.Value.contactList;
                 //contactList.Add(imagePanel.GetComponent<Contact>());
+            };
+        }
+        if (killScrollView.activeSelf == true)
+        {
+            int imageIndex = imagesList.IndexOf(imagePanel);
+
+            PopupPanel popupPanel = Instantiate(popupPanelPrefab, transform).GetComponent<PopupPanel>();
+            popupPanel.Open();
+            popupPanel.popupDelegate = () =>
+            {
+                j = 2;
+                h = imagesList.IndexOf(imagePanel);
+                storeListDelegate.DidSelectAdd(this);
+                popupPanel.Close();
+            };
+        }
+        if (defenseScrollView.activeSelf == true)
+        {
+            int imageIndex = imagesList.IndexOf(imagePanel);
+
+            PopupPanel popupPanel = Instantiate(popupPanelPrefab, transform).GetComponent<PopupPanel>();
+            popupPanel.Open();
+            popupPanel.popupDelegate = () =>
+            {
+                j = 3;
+                h = imagesList.IndexOf(imagePanel);
+                storeListDelegate.DidSelectAdd(this);
+                popupPanel.Close();
+            };
+        }
+        if (storeScrollView.activeSelf == true)
+        {
+            int imageIndex = imagesList.IndexOf(imagePanel);
+
+            PopupPanel popupPanel = Instantiate(popupPanelPrefab, transform).GetComponent<PopupPanel>();
+            popupPanel.Open();
+            popupPanel.popupDelegate = () =>
+            {
+                j = 4;
+                h = imagesList.IndexOf(imagePanel);
+                storeListDelegate.DidSelectAdd(this);
+                popupPanel.Close();
             };
         }
 

@@ -10,6 +10,8 @@ public class MySlotManager : MonoBehaviour
     [SerializeField] GameObject threeSlotList;
     [SerializeField] GameObject packPanelPrefab;
 
+    [SerializeField] Button imagesButton;
+
     [SerializeField] RectTransform packPanel;
 
     [SerializeField] PlayViewManager playViewManager;
@@ -36,11 +38,30 @@ public class MySlotManager : MonoBehaviour
     public void OnPackOpen()
     {
         PackManager packManager = Instantiate(packPanelPrefab, packPanel).GetComponent<PackManager>();
-
-        playViewManager.GetComponent<SlotListManager>();
-        foreach (Images images in playViewManager.imagesList)
+        ActiveDelete = true;
+    }
+    private void Start()
+    {
+        ActiveDelete = false;
+    }
+    public bool ActiveDelete
+    {
+        get
         {
-            images.ActiveDelete = true;
+            return packPanelPrefab.gameObject.activeSelf;
+        }
+        set
+        {
+            packPanelPrefab.gameObject.SetActive(value);
+
+            if (value)
+            {
+                imagesButton.interactable = true;
+            }
+            else
+            {
+                imagesButton.interactable = false;
+            }
         }
     }
 
