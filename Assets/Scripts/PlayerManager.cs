@@ -13,11 +13,6 @@ public class PlayerManager : MonoBehaviour
         Open();
     }
 
-    public void OnStoreButton()
-    {
-
-    }
-
     public void Open()
     {
         PlayViewManager playViewManager = Instantiate(playViewPrefab, content).GetComponent<PlayViewManager>();

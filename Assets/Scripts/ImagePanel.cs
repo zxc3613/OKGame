@@ -10,6 +10,7 @@ public interface IImagePanel
 public class ImagePanel : MonoBehaviour
 {
     [SerializeField] Image photoImage;
+
     public IImagePanel imagePanelDelegate;
  
     public Sprite photoImageSprite
@@ -22,5 +23,4 @@ public class ImagePanel : MonoBehaviour
     {
         imagePanelDelegate.DidSelectImagePanel(this);
     }
-
 }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayViewManager : MonoBehaviour
+public class PlayViewManager : MonoBehaviour, IStoreListManager
 {
     Contacts? contacts;
 
     [SerializeField] GameObject imagesPrefab;
     [SerializeField] GameObject storeListPrefab;
-    [SerializeField] RectTransform content;
+    public RectTransform content;
     public List<Images> imagesList = new List<Images>();
     float imageHeight = 160;
 
@@ -64,4 +64,8 @@ public class PlayViewManager : MonoBehaviour
         StoreListManager storeListManager = Instantiate(storeListPrefab, transform).GetComponent<StoreListManager>();
     }
 
+    public void DidSelectAdd(StoreListManager storeListManager)
+    {
+        throw new System.NotImplementedException();
+    }
 }

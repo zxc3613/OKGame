@@ -16,8 +16,12 @@ public class PopupPanel : MonoBehaviour
     public void OnCilckOK()
     {
         popupDelegate.Invoke();
+        Close();
     }
-
+    public void Open()
+    {
+        animator.SetTrigger("open");
+    }
     public void Close()
     {
         animator.SetTrigger("close");
